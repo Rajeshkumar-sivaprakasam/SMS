@@ -85,3 +85,5 @@ C:\Users\Dell\source\repos\SMS\SMS\obj\Debug\SMS.csproj.CoreCompileInputs.cache
 C:\Users\Dell\source\repos\SMS\SMS\obj\Debug\SMS.csproj.CopyComplete
 C:\Users\Dell\source\repos\SMS\SMS\obj\Debug\SMS.dll
 C:\Users\Dell\source\repos\SMS\SMS\obj\Debug\SMS.pdb
+C:\Users\Dell\source\repos\SMS\SMS\obj\Debug\SMS.csprojAssemblyReference.cache
+C:\Users\Dell\source\repos\SMS\SMS\obj\Debug\SMS.Migrations.ForeignKeyAdded.resources

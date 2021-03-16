@@ -30,5 +30,10 @@ namespace SMS.Controllers
 
             return View();
         }
+        public ActionResult GetStudent()
+        {
+
+            return View();
+        }
     }
 }

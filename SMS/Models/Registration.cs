@@ -9,7 +9,7 @@ namespace SMS.Models
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public string LastNamme { get; set; }
+        public string LastName { get; set; }
         public string CourseId { get; set; }
         public string BatchId { get; set; }
         public int[] PhoneNo { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,16 +25,26 @@ namespace SMS.Controllers
 
             return View();
         }
-
         public ActionResult Create()
         {
 
             return View();
         }
-        public ActionResult GetStudent()
+
+
+        [HttpPost]
+        public ActionResult Create(User userObj)
         {
 
-            return View();
+            _context.Users.Add(userObj);
+            _context.SaveChanges();
+            //return View("~/Views/Student/GetStudent.cshtml");
+            return RedirectToAction("GetStudent", "Student");
+        }
+        public ActionResult GetStudent()
+        {
+            var list = _context.Users.ToList();
+            return View(list);
         }
     }
 }

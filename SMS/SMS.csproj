@@ -209,6 +209,7 @@
     <Content Include="Views\Student\GetStudent.cshtml" />
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\Registration\Create.cshtml" />
+    <Content Include="Views\Course\Details.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>

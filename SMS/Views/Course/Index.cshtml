@@ -20,15 +20,13 @@
         </th>
         <th></th>
     </tr>
-    @*
-
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CourseName)
+            @Html.Raw(item.CourseName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Year)
+            @Html.Raw(item.Year)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -36,6 +34,5 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
-}
-*@
+             }
 </table>

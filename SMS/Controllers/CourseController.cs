@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,75 +9,92 @@ namespace SMS.Controllers
 {
     public class CourseController : Controller
     {
+        private Models.AppContext _context;
+        public CourseController()
+        {
+            _context = new Models.AppContext();
+        }
         // GET: Course
         public ActionResult Index()
         {
-            return View();
+            var list = _context.Courses.ToList();
+            return View(list);
         }
 
         // GET: Course/Details/5
+        
+        [HttpPost]
+        public ActionResult Create(Course courseObj)
+        {
+            if (courseObj != null)
+            {
+                if (courseObj.Id > 0)
+                {
+
+                    var courseFromDb = _context.Users.FirstOrDefault(u => u.Id == courseObj.Id);
+                    if (courseFromDb == null)
+                        return HttpNotFound();
+                    courseFromDb.FirstName = courseObj.CourseName;
+                    courseFromDb.LastName = courseObj.Year;
+                    //courseFromDb.Password = courseObj.Password;
+                }
+                else
+                {
+                    _context.Courses.Add(courseObj);
+                }
+            }
+
+            _context.SaveChanges();
+            //return View("~/Views/Student/GetStudent.cshtml");
+            return RedirectToAction("Index","Course");
+        }
+        
         public ActionResult Create()
         {
             return View();
-        }
-        // POST: Course/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            
         }
 
-        // GET: Course/Edit/5
-        public ActionResult Edit(int id)
+        /*public ActionResult Details()
         {
+            return View();
+        }*/
+        public ActionResult Details(int? id)
+        {
+            //value types and reference type
+
+
+
+            var courseDetails = _context.Courses.Where(x => x.Id == id).FirstOrDefault();
+            if (courseDetails != null)
+            {
+                return View(courseDetails);
+            }
+
             return View();
         }
 
-        // POST: Course/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        public ActionResult Delete(int? id)
+        {
+
+            if (id == null)
+                return HttpNotFound();
+
+            var course = _context.Courses.FirstOrDefault(u => u.Id == id);
+
+            if (course == null)
+                return HttpNotFound();
+            _context.Courses.Remove(course);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+
         }
 
-        // GET: Course/Delete/5
-        public ActionResult Delete(int id)
+        protected override void Dispose(bool disposing)
         {
-            return View();
-        }
-
-        // POST: Course/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _context.Dispose();
         }
     }
 }

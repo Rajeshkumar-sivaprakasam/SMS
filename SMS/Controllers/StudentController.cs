@@ -74,9 +74,14 @@ namespace SMS.Controllers
         /*public ActionResult Details()
         {
             return View();
-        }*/
+        }
+        */
         public ActionResult Details(int? id)
         {
+            //value types and reference type
+            
+
+
             var studentDetails = _context.Users.Where(x => x.Id == id).FirstOrDefault();
             if (studentDetails != null)
             {
@@ -85,6 +90,7 @@ namespace SMS.Controllers
 
             return View();
         }
+
 
         public ActionResult Delete(int? id)
         {
@@ -101,6 +107,11 @@ namespace SMS.Controllers
 
             return RedirectToAction("GetStudent");
 
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
         }
     }
 }

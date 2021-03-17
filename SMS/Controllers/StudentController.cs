@@ -71,5 +71,19 @@ namespace SMS.Controllers
             }
             return  View(); 
         }
+        /*public ActionResult Details()
+        {
+            return View();
+        }*/
+        public ActionResult Details(int id)
+        {
+            var studentDetails = _context.Users.Where(x => x.Id == id).FirstOrDefault();
+            if (studentDetails != null)
+            {
+                return View(studentDetails);
+            }
+
+            return View();
+        }
     }
 }

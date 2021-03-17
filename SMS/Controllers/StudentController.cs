@@ -35,8 +35,24 @@ namespace SMS.Controllers
         [HttpPost]
         public ActionResult Create(User userObj)
         {
-
-            _context.Users.Add(userObj);
+            if (userObj!=null)
+            {
+                if (userObj.Id > 0)
+                {
+                    
+                    var userFromDb = _context.Users.FirstOrDefault(u => u.Id == userObj.Id);
+                    if (userFromDb == null)
+                        return HttpNotFound();
+                    userFromDb.FirstName = userObj.FirstName;
+                    userFromDb.LastName = userObj.LastName;
+                    userFromDb.Password = userObj.Password;
+                }
+                else
+                {
+                    _context.Users.Add(userObj);
+                }
+            }
+           
             _context.SaveChanges();
             //return View("~/Views/Student/GetStudent.cshtml");
             return RedirectToAction("GetStudent", "Student");
@@ -45,6 +61,15 @@ namespace SMS.Controllers
         {
             var list = _context.Users.ToList();
             return View(list);
+        }
+        public ActionResult Edit(int id)
+        {
+            var studentDetails = _context.Users.Where(x => x.Id == id).FirstOrDefault();
+            if(studentDetails != null)
+            {
+                return View("create",studentDetails);
+            }
+            return  View(); 
         }
     }
 }

@@ -75,7 +75,7 @@ namespace SMS.Controllers
         {
             return View();
         }*/
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             var studentDetails = _context.Users.Where(x => x.Id == id).FirstOrDefault();
             if (studentDetails != null)
@@ -84,6 +84,23 @@ namespace SMS.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult Delete(int? id)
+        {
+
+            if (id == null)
+                return HttpNotFound();
+
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+                return HttpNotFound();
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return RedirectToAction("GetStudent");
+
         }
     }
 }

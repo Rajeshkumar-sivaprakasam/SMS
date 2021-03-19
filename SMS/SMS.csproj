@@ -211,6 +211,8 @@
     <Content Include="Views\Registration\Create.cshtml" />
     <Content Include="Views\Course\Details.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Batch\Details.cshtml" />
+    <Content Include="Views\Registration\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
